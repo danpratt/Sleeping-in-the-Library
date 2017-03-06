@@ -43,5 +43,29 @@ class ViewController: UIViewController {
     private func getImageFromFlickr() {
         
         // TODO: Write the network code here!
+        
+    }
+    
+    private func escapedParameters(_ parameters: [String: AnyObject]) -> String {
+        
+        if parameters.isEmpty {
+            return ""
+        } else {
+            var keyValuePairs = [String]()
+            
+            for (key, value) in parameters {
+                
+                // make sure that it isa  astring value
+                let stringValue = "\(value)"
+                // escape it
+                let escapedValue = stringValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                // apend it
+                keyValuePairs.append(key + "=" + "\(escapedValue!)")
+            }
+            
+            return "?\(keyValuePairs.joined(separator: "&"))"
+        }
+        
+        
     }
 }
